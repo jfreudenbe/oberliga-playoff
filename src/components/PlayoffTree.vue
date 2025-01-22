@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-bold text-xl">Playoff Bracket</h2>
+      <button
+        @click="resetBracket"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+      >
+        Reset
+      </button>
+    </div>
     <h2 class="font-bold text-xl mb-4">Playoff Bracket</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -489,6 +498,39 @@ export default {
       this.bracket.finale[0] = [sortedCandidates[0], sortedCandidates[1]]; // Best vs Second best
 
       this.finaleCandidates = [];
+    },
+    resetBracket() {
+      this.decidedMatches = {}; // Clear all decided matches
+      this.prePlayoffWinners = []; // Clear pre-playoff winners
+      this.viertelfinaleCandidates = []; // Clear Viertelfinale candidates
+      this.halbfinaleCandidates = []; // Clear Halbfinale candidates
+      this.finaleCandidates = []; // Clear Finale candidates
+
+      // Reinitialize the bracket
+      this.bracket = {
+        prePlayoffs: [
+          [this.teams.süd[6], this.teams.süd[9]], // Süd 7 vs Süd 10
+          [this.teams.süd[7], this.teams.süd[8]], // Süd 8 vs Süd 9
+          [this.teams.nord[6], this.teams.nord[9]], // Nord 7 vs Nord 10
+          [this.teams.nord[7], this.teams.nord[8]], // Nord 8 vs Nord 9
+        ],
+        achtelfinale: [
+          [this.teams.nord[0], { name: "TBD" }], // Nord 1 vs TBD
+          [this.teams.süd[0], { name: "TBD" }], // Süd 1 vs TBD
+          [this.teams.nord[1], { name: "TBD" }], // Nord 2 vs TBD
+          [this.teams.süd[1], { name: "TBD" }], // Süd 2 vs TBD
+          [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
+          [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
+          [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
+          [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
+        ],
+        viertelfinale: new Array(4).fill(null).map(() => [null, null]),
+        halbfinale: new Array(2).fill(null).map(() => [null, null]),
+        finale: [[null, null]],
+      };
+
+      // Debugging log
+      console.log("Bracket has been reset.");
     },
   },
 };
