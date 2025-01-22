@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
     <div class="flex gap-x-12 md:flex-row flex-col">
-      <TeamTable :teams="teams" class="md:w-1/4 w-full mt-12 md:mt-0" />
-      <div class="w-full md:w-3/4 order-first md:order-last">
+      <TeamTable :teams="teams" class="md:w-1/5 w-full mt-12 md:mt-0" />
+      <div class="w-full md:w-4/5 order-first md:order-last">
         <PlayoffTree :teams="teams" />
       </div>
     </div>

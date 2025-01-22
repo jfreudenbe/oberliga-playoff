@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="flex justify-between items-center mb-4">
-      <h2 class="font-bold text-xl">Playoff Bracket</h2>
+      <div>
+        <h2 class="font-bold text-3xl text-gray-800">Playoff Bracket</h2>
+        <p class="text-lg text-gray-700">
+          Pick your winner by clicking on the teams logo.
+        </p>
+      </div>
       <button
         @click="resetBracket"
         class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -9,7 +14,6 @@
         Reset
       </button>
     </div>
-    <h2 class="font-bold text-xl mb-4">Playoff Bracket</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
       <!-- Pre-Playoffs -->
@@ -20,21 +24,22 @@
           :key="'pre-' + index"
           class="mb-4"
         >
-          <div class="flex justify-between items-center p-2 border">
+          <div
+            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+          >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
                 :src="match[0]?.logo || ''"
                 :alt="match[0]?.name || 'TBD'"
-                class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-110 hover:border-2 hover:border-green-500"
+                class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500 pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`prePlayoffs-${index}`] === match[0].name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`prePlayoffs-${index}`] &&
                     decidedMatches[`prePlayoffs-${index}`] !== match[0].name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`prePlayoffs-${index}`],
+                  '': !decidedMatches[`prePlayoffs-${index}`],
                 }"
                 @click="advanceTeam(match[0], 'prePlayoffs', index)"
               />
@@ -48,15 +53,14 @@
               <img
                 :src="match[1]?.logo || ''"
                 :alt="match[1]?.name || 'TBD'"
-                class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-110 hover:border-2 hover:border-green-500"
+                class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500  pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`prePlayoffs-${index}`] === match[1].name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`prePlayoffs-${index}`] &&
                     decidedMatches[`prePlayoffs-${index}`] !== match[1].name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`prePlayoffs-${index}`],
+                  '': !decidedMatches[`prePlayoffs-${index}`],
                 }"
                 @click="advanceTeam(match[1], 'prePlayoffs', index)"
               />
@@ -73,22 +77,23 @@
           :key="'achtelfinale-' + index"
           class="mb-4"
         >
-          <div class="flex justify-between items-center p-2 border">
+          <div
+            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+          >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
                 v-if="match[0]"
                 :src="match[0]?.logo || ''"
                 :alt="match[0]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500  pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`achtelfinale-${index}`] === match[0].name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`achtelfinale-${index}`] &&
                     decidedMatches[`achtelfinale-${index}`] !== match[0].name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`achtelfinale-${index}`],
+                  '': !decidedMatches[`achtelfinale-${index}`],
                 }"
                 @click="advanceTeam(match[0], 'achtelfinale', index)"
               />
@@ -106,15 +111,14 @@
                 v-if="match[1].logo"
                 :src="match[1]?.logo || ''"
                 :alt="match[1]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500  pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`achtelfinale-${index}`] === match[1].name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`achtelfinale-${index}`] &&
                     decidedMatches[`achtelfinale-${index}`] !== match[1].name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`achtelfinale-${index}`],
+                  '': !decidedMatches[`achtelfinale-${index}`],
                 }"
                 @click="advanceTeam(match[1], 'achtelfinale', index)"
               />
@@ -134,22 +138,23 @@
           :key="'viertelfinale-' + index"
           class="mb-4"
         >
-          <div class="flex justify-between items-center p-2 border">
+          <div
+            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+          >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
                 v-if="match[0]"
                 :src="match[0]?.logo || ''"
                 :alt="match[0]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500  pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`viertelfinale-${index}`] === match[0]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`viertelfinale-${index}`] &&
                     decidedMatches[`viertelfinale-${index}`] !== match[0]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`viertelfinale-${index}`],
+                  '': !decidedMatches[`viertelfinale-${index}`],
                 }"
                 @click="advanceTeam(match[0], 'viertelfinale', index)"
               />
@@ -167,15 +172,14 @@
                 v-if="match[1]"
                 :src="match[1]?.logo || ''"
                 :alt="match[1]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500  pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`viertelfinale-${index}`] === match[1]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`viertelfinale-${index}`] &&
                     decidedMatches[`viertelfinale-${index}`] !== match[1]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`viertelfinale-${index}`],
+                  '': !decidedMatches[`viertelfinale-${index}`],
                 }"
                 @click="advanceTeam(match[1], 'viertelfinale', index)"
               />
@@ -196,22 +200,23 @@
           :key="'halbfinale-' + index"
           class="mb-4"
         >
-          <div class="flex justify-between items-center p-2 border">
+          <div
+            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+          >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
                 v-if="match[0]"
                 :src="match[0]?.logo || ''"
                 :alt="match[0]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500 pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`halbfinale-${index}`] === match[0]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`halbfinale-${index}`] &&
                     decidedMatches[`halbfinale-${index}`] !== match[0]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`halbfinale-${index}`],
+                  '': !decidedMatches[`halbfinale-${index}`],
                 }"
                 @click="advanceTeam(match[0], 'halbfinale', index)"
               />
@@ -229,15 +234,14 @@
                 v-if="match[1]"
                 :src="match[1]?.logo || ''"
                 :alt="match[1]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500 pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches[`halbfinale-${index}`] === match[1]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches[`halbfinale-${index}`] &&
                     decidedMatches[`halbfinale-${index}`] !== match[1]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches[`halbfinale-${index}`],
+                  '': !decidedMatches[`halbfinale-${index}`],
                 }"
                 @click="advanceTeam(match[1], 'halbfinale', index)"
               />
@@ -253,22 +257,23 @@
       <div>
         <h3 class="font-bold text-center mb-2">Finale</h3>
         <div v-if="bracket.finale.length && bracket.finale[0]">
-          <div class="flex justify-between items-center p-2 border">
+          <div
+            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+          >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
                 v-if="bracket.finale[0][0]"
                 :src="bracket.finale[0][0]?.logo || ''"
                 :alt="bracket.finale[0][0]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500 pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches['finale-0'] === bracket.finale[0][0]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches['finale-0'] &&
                     decidedMatches['finale-0'] !== bracket.finale[0][0]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches['finale-0'],
+                  '': !decidedMatches['finale-0'],
                 }"
                 @click="advanceTeam(bracket.finale[0][0], 'finale', 0)"
               />
@@ -286,15 +291,14 @@
                 v-if="bracket.finale[0][1]"
                 :src="bracket.finale[0][1]?.logo || ''"
                 :alt="bracket.finale[0][1]?.name || 'TBD'"
-                class="h-12 w-12 object-contain cursor-pointer hover:scale-110"
+                class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'border border-green-500 pointer-events-none':
+                  'saturate-150 pointer-events-none scale-125':
                     decidedMatches['finale-0'] === bracket.finale[0][1]?.name,
-                  'opacity-50 pointer-events-none':
+                  'opacity-50 saturate-50 pointer-events-none':
                     !!decidedMatches['finale-0'] &&
                     decidedMatches['finale-0'] !== bracket.finale[0][1]?.name,
-                  'hover:border-2 hover:border-green-500':
-                    !decidedMatches['finale-0'],
+                  '': !decidedMatches['finale-0'],
                 }"
                 @click="advanceTeam(bracket.finale[0][1], 'finale', 0)"
               />
