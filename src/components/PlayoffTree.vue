@@ -362,10 +362,8 @@ export default {
     advanceTeam(team, round, matchIndex) {
       const matchKey = `${round}-${matchIndex}`;
 
-      // Prevent multiple clicks
       if (this.decidedMatches[matchKey]) return;
 
-      // Mark the selected team for the match
       this.decidedMatches = {
         ...this.decidedMatches,
         [matchKey]: team.name,
@@ -435,29 +433,20 @@ export default {
       console.log("Süd Teams:", südTeams);
       console.log("Final Alternating Order:", this.prePlayoffWinners);
 
-      // Assign Achtelfinale matchups
       const sortedWinners = this.prePlayoffWinners;
-
-      //assign sorted winners first team is best seed from nord second team is worst seed from süd
 
       this.bracket.achtelfinale[0][1] = sortedWinners[0]; // Worst seed plays Nord #1 (Tilburg)
       this.bracket.achtelfinale[1][1] = sortedWinners[1]; // Second worst seed plays Süd #1 (Bietigheim)
       this.bracket.achtelfinale[2][1] = sortedWinners[2]; // Second best seed plays Nord #2 (Hannover Scorpions)
       this.bracket.achtelfinale[3][1] = sortedWinners[3]; // Best seed plays Süd #2 (Heilbronn)
 
-      // Clear prePlayoffWinners after assignment
       this.prePlayoffWinners = [];
     },
     assignViertelfinale() {
-      //take vierFinalCandidates and sort them by standing and put them in a new array
       this.viertelfinaleCandidates.sort((a, b) => {
         return a.seed - b.seed;
       });
 
-      //console log the sorted viertFinalCandidates
-      console.log(this.viertelfinaleCandidates);
-
-      // Assign Viertelfinale matchups (best vs worst)
       const sortedCandidates = this.viertelfinaleCandidates;
       this.bracket.viertelfinale[0] = [
         sortedCandidates[0],
@@ -480,12 +469,10 @@ export default {
     },
 
     assignHalbfinale() {
-      // Sort Halbfinale candidates by seeding
       this.halbfinaleCandidates.sort((a, b) => {
         return a.seed - b.seed;
       });
 
-      // Assign Halbfinale matchups
       const sortedCandidates = this.halbfinaleCandidates;
       this.bracket.halbfinale[0] = [sortedCandidates[0], sortedCandidates[3]]; // Best vs Worst
       this.bracket.halbfinale[1] = [sortedCandidates[1], sortedCandidates[2]]; // Second best vs Third best
@@ -494,12 +481,10 @@ export default {
     },
 
     assignFinale() {
-      // Sort Finale candidates by seeding
       this.finaleCandidates.sort((a, b) => {
         return a.seed - b.seed;
       });
 
-      // Assign Finale matchup
       const sortedCandidates = this.finaleCandidates;
       this.bracket.finale[0] = [sortedCandidates[0], sortedCandidates[1]]; // Best vs Second best
 
