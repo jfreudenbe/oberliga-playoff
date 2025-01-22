@@ -1,31 +1,31 @@
 {
-    "nord": [
-      { "name": "Tilburg Trappers", "logo": "/src/assets/logos/tilburg_trappers.png", "standing": 1 },
-      { "name": "Hannover Scorpions", "logo": "/src/assets/logos/hannover_scorpions.png", "standing": 2 },
-      { "name": "KSW Icefighters Leipzig", "logo": "/src/assets/logos/icefighters_leipzig.png", "standing": 3 },
-      { "name": "Hannover Indians", "logo": "/src/assets/logos/hannover_indians.png", "standing": 4 },
-      { "name": "ESC Wohnbau Moskitos Essen", "logo": "/src/assets/logos/moskitos_essen.png", "standing": 5 },
-      { "name": "Herforder EV", "logo": "/src/assets/logos/herforder_ev.png", "standing": 6 },
-      { "name": "Hammer Eisbären", "logo": "/src/assets/logos/hammer_eisbaeren.png", "standing": 7 },
-      { "name": "Rostock Piranhas", "logo": "/src/assets/logos/rostock_piranhas.png", "standing": 8 },
-      { "name": "Saale Bulls Halle", "logo": "/src/assets/logos/saale_bulls_halle.png", "standing": 9 },
-      { "name": "Füchse Duisburg", "logo": "/src/assets/logos/fuechse_duisburg.png", "standing": 10 },
-      { "name": "TecArt Black Dragons", "logo": "/src/assets/logos/black_dragons.png", "standing": 11 },
-      { "name": "Herner EV Miners", "logo": "/src/assets/logos/herner_ev_miners.png", "standing": 12 }
-    ],
-    "süd": [
-      { "name": "Bietigheim Steelers", "logo": "/src/assets/logos/bietigheim_steelers.png", "standing": 1 },
-      { "name": "Heilbronner Falken", "logo": "/src/assets/logos/heilbronner_falken.png", "standing": 2 },
-      { "name": "Deggendorfer SC", "logo": "/src/assets/logos/deggendorfer_sc.png", "standing": 3 },
-      { "name": "ECDC Memmingen Indians", "logo": "/src/assets/logos/memmingen_indians.png", "standing": 4 },
-      { "name": "Tölzer Löwen", "logo": "/src/assets/logos/toelzer_loewen.png", "standing": 5 },
-      { "name": "SC Riessersee", "logo": "/src/assets/logos/sc_riessersee.png", "standing": 6 },
-      { "name": "Höchstadter EC", "logo": "/src/assets/logos/hoechstadter_ec.png", "standing": 7 },
-      { "name": "EV Lindau Islanders", "logo": "/src/assets/logos/lindau_islanders.png", "standing": 8 },
-      { "name": "EV Füssen", "logo": "/src/assets/logos/ev_fuessen.png", "standing": 9 },
-      { "name": "EC Peiting", "logo": "/src/assets/logos/ec_peiting.png", "standing": 10 },
-      { "name": "onesto Tigers Bayreuth", "logo": "/src/assets/logos/tigers_bayreuth.png", "standing": 11 },
-      { "name": "EHF Passau Black Hawks", "logo": "/src/assets/logos/passau_black_hawks.png", "standing": 12 },
-      { "name": "Stuttgarter EC", "logo": "/src/assets/logos/stuttgarter_ec.png", "standing": 13 }
-    ]
+  "nord": [
+    { "name": "Tilburg Trappers", "seed": 1, "logo": "/src/assets/logos/tilburg_trappers.png", "standing": 1 },
+    { "name": "Hannover Scorpions", "seed": 3, "logo": "/src/assets/logos/hannover_scorpions.png", "standing": 2 },
+    { "name": "KSW Icefighters Leipzig", "seed": 5, "logo": "/src/assets/logos/icefighters_leipzig.png", "standing": 3 },
+    { "name": "Hannover Indians", "seed": 7, "logo": "/src/assets/logos/hannover_indians.png", "standing": 4 },
+    { "name": "ESC Wohnbau Moskitos Essen", "seed": 9, "logo": "/src/assets/logos/moskitos_essen.png", "standing": 5 },
+    { "name": "Herforder EV", "seed": 11, "logo": "/src/assets/logos/herforder_ev.png", "standing": 6 },
+    { "name": "Hammer Eisbären", "seed": 13, "logo": "/src/assets/logos/hammer_eisbaeren.png", "standing": 7 },
+    { "name": "Rostock Piranhas", "seed": 15, "logo": "/src/assets/logos/rostock_piranhas.png", "standing": 8 },
+    { "name": "Saale Bulls Halle", "seed": 17, "logo": "/src/assets/logos/saale_bulls_halle.png", "standing": 9 },
+    { "name": "Füchse Duisburg", "seed": 19, "logo": "/src/assets/logos/fuechse_duisburg.png", "standing": 10 },
+    { "name": "TecArt Black Dragons", "seed": 21, "logo": "/src/assets/logos/black_dragons.png", "standing": 11 },
+    { "name": "Herner EV Miners", "seed": 23, "logo": "/src/assets/logos/herner_ev_miners.png", "standing": 12 }
+  ],
+  "süd": [
+    { "name": "Bietigheim Steelers", "seed": 2, "logo": "/src/assets/logos/bietigheim_steelers.png", "standing": 1 },
+    { "name": "Heilbronner Falken", "seed": 4, "logo": "/src/assets/logos/heilbronner_falken.png", "standing": 2 },
+    { "name": "Deggendorfer SC", "seed": 6, "logo": "/src/assets/logos/deggendorfer_sc.png", "standing": 3 },
+    { "name": "ECDC Memmingen Indians", "seed": 8, "logo": "/src/assets/logos/memmingen_indians.png", "standing": 4 },
+    { "name": "Tölzer Löwen", "seed": 10, "logo": "/src/assets/logos/toelzer_loewen.png", "standing": 5 },
+    { "name": "SC Riessersee", "seed": 12, "logo": "/src/assets/logos/sc_riessersee.png", "standing": 6 },
+    { "name": "Höchstadter EC", "seed": 14, "logo": "/src/assets/logos/hoechstadter_ec.png", "standing": 7 },
+    { "name": "EV Lindau Islanders", "seed": 16, "logo": "/src/assets/logos/lindau_islanders.png", "standing": 8 },
+    { "name": "EV Füssen", "seed": 18, "logo": "/src/assets/logos/ev_fuessen.png", "standing": 9 },
+    { "name": "EC Peiting", "seed": 20, "logo": "/src/assets/logos/ec_peiting.png", "standing": 10 },
+    { "name": "onesto Tigers Bayreuth", "seed": 22, "logo": "/src/assets/logos/tigers_bayreuth.png", "standing": 11 },
+    { "name": "EHF Passau Black Hawks", "seed": 24, "logo": "/src/assets/logos/passau_black_hawks.png", "standing": 12 },
+    { "name": "Stuttgarter EC", "seed": 26, "logo": "/src/assets/logos/stuttgarter_ec.png", "standing": 13 }
+  ]
 }
