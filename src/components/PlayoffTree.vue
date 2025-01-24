@@ -1,24 +1,34 @@
 <template>
   <div>
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex md:justify-between justify-center items-center mb-4">
       <div>
-        <h2 class="font-bold text-3xl text-gray-800">Playoff Bracket</h2>
-        <p class="text-lg text-gray-700">
+        <h2
+          class="font-bold text-center md:text-left text-2xl md:text-4xl text-gray-800"
+        >
+          Playoff Bracket Simulation
+        </h2>
+        <p
+          class="text-sm md:text-lg text-center md:text-left leading-tight text-gray-700 mt-1 md:mt-4"
+        >
           Pick your winner by clicking on the teams logo.
         </p>
       </div>
       <button
         @click="resetBracket"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 fixed bottom-4 right-4 md:static md:bottom-0 md:right-0"
       >
         Reset
       </button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+    <div
+      class="grid grid-cols-1 md:grid-cols-5 gap-12 md:mt-12 max-w-screen-2xl"
+    >
       <!-- Pre-Playoffs -->
-      <div>
-        <h3 class="font-bold text-center mb-2">Pre-Playoffs</h3>
+      <div class="md:max-w-72">
+        <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
+          Pre-Playoffs
+        </h3>
         <div
           v-for="(match, index) in bracket.prePlayoffs"
           :key="'pre-' + index"
@@ -46,7 +56,7 @@
             </div>
 
             <!-- VS -->
-            <div>vs</div>
+            <div class="text-gray-600">vs</div>
 
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
@@ -70,15 +80,17 @@
       </div>
 
       <!-- Achtelfinale -->
-      <div>
-        <h3 class="font-bold text-center mb-2">Achtelfinale</h3>
+      <div class="md:max-w-72">
+        <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
+          Achtelfinale
+        </h3>
         <div
           v-for="(match, index) in bracket.achtelfinale"
           :key="'achtelfinale-' + index"
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -97,13 +109,16 @@
                 }"
                 @click="advanceTeam(match[0], 'achtelfinale', index)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
 
             <!-- VS -->
-            <div>vs</div>
+            <div class="text-gray-600">vs</div>
 
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
@@ -122,7 +137,10 @@
                 }"
                 @click="advanceTeam(match[1], 'achtelfinale', index)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
@@ -131,15 +149,17 @@
       </div>
 
       <!-- Viertelfinale -->
-      <div>
-        <h3 class="font-bold text-center mb-2">Viertelfinale</h3>
+      <div class="md:max-w-72">
+        <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
+          Viertelfinale
+        </h3>
         <div
           v-for="(match, index) in bracket.viertelfinale"
           :key="'viertelfinale-' + index"
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -158,13 +178,16 @@
                 }"
                 @click="advanceTeam(match[0], 'viertelfinale', index)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
 
             <!-- VS -->
-            <div>vs</div>
+            <div class="text-gray-600">vs</div>
 
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
@@ -184,7 +207,10 @@
                 @click="advanceTeam(match[1], 'viertelfinale', index)"
               />
 
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
@@ -193,15 +219,17 @@
       </div>
 
       <!-- Halbfinale -->
-      <div>
-        <h3 class="font-bold text-center mb-2">Halbfinale</h3>
+      <div class="md:max-w-72">
+        <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
+          Halbfinale
+        </h3>
         <div
           v-for="(match, index) in bracket.halbfinale"
           :key="'halbfinale-' + index"
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -220,13 +248,16 @@
                 }"
                 @click="advanceTeam(match[0], 'halbfinale', index)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
 
             <!-- VS -->
-            <div>vs</div>
+            <div class="text-gray-600">vs</div>
 
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
@@ -245,7 +276,10 @@
                 }"
                 @click="advanceTeam(match[1], 'halbfinale', index)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
@@ -254,11 +288,13 @@
       </div>
 
       <!-- Finale -->
-      <div>
-        <h3 class="font-bold text-center mb-2">Finale</h3>
+      <div class="md:max-w-72">
+        <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
+          Finale
+        </h3>
         <div v-if="bracket.finale.length && bracket.finale[0]">
           <div
-            class="flex justify-around items-center p-2 py-3 border-gray-200 rounded-md shadow-md border"
+            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -277,13 +313,16 @@
                 }"
                 @click="advanceTeam(bracket.finale[0][0], 'finale', 0)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
 
             <!-- VS -->
-            <div>vs</div>
+            <div class="text-gray-600">vs</div>
 
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
@@ -302,7 +341,10 @@
                 }"
                 @click="advanceTeam(bracket.finale[0][1], 'finale', 0)"
               />
-              <div v-else class="h-12 w-12 flex items-center justify-center">
+              <div
+                v-else
+                class="h-12 w-12 flex items-center justify-center text-gray-600"
+              >
                 TBD
               </div>
             </div>
