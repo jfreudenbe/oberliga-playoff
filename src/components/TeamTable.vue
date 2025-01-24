@@ -1,12 +1,12 @@
 <template>
   <h2
-    class="font-bold text-2xl text-gray-800 mb-4 mt-24 md:text-left text-center"
+    class="font-bold text-2xl text-gray-800 mb-4 mt-24 md:text-left text-center px-4"
   >
     Tabellen
   </h2>
 
   <div
-    class="grid grid-cols-1 md:grid-cols-2 gap-x-12 mx-auto md:mx-0 md:max-w-lg"
+    class="grid grid-cols-1 md:grid-cols-2 gap-x-12 mx-auto md:mx-0 md:max-w-xl px-4 pb-4"
   >
     <table
       class="table-auto w-full border-collapse border border-gray-300 mb-6 md:max-w-64"

@@ -1,28 +1,53 @@
 <template>
+  <div class="overflow-auto p-4 md:py-24 bg-gray-50 text-balance">
+    <h1
+      class="md:text-6xl text-4xl font-black text-gray-800 text-center leading-tight"
+    >
+      Oberliga Playoff Prediction Tool
+    </h1>
+    <h2
+      class="text-center md:text-2xl text-lg leading-snug mt-4 text-gray-700 md:mt-6"
+    >
+      Simply choose the winner by clicking on the teams logo.
+    </h2>
+    <div
+      class="flex justify-center mt-12 gap-3 md:gap-6 flex-row md:w-full w-fit mx-auto"
+    >
+      <a class="relative" href="#" @click="downloadBracket">
+        <span
+          class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"
+        ></span>
+        <span
+          class="text-xs md:text-base text-center font-medium md:fold-bold relative inline-block h-full w-full md:font-bold rounded border-2 border-black bg-white px-3 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900"
+        >
+          Download Bracket as .png
+        </span>
+      </a>
+      <a class="relative w-fit" href="#" @click="resetBracket">
+        <span
+          class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-red-300"
+        ></span>
+        <span
+          class="text-center font-medium md:fold-bold relative inline-block h-full w-full rounded border-2 md:font-bold border-red-500 bg-red-50 px-3 py-1 text-xs md:text-base text-red-800 transition duration-100 hover:bg-red-400 hover:text-red-900"
+        >
+          Reset Bracket
+        </span>
+      </a>
+    </div>
+  </div>
   <div>
-    <div class="flex md:justify-between justify-center items-center mb-4">
-      <div>
-        <h2
-          class="font-bold text-center md:text-left text-2xl md:text-4xl text-gray-800"
-        >
-          Playoff Bracket Simulation
-        </h2>
-        <p
-          class="text-sm md:text-lg text-center md:text-left leading-tight text-gray-700 mt-1 md:mt-4"
-        >
-          Pick your winner by clicking on the teams logo.
-        </p>
-      </div>
+    <div class="flex md:justify-between justify-center items-center mb-12">
       <button
         @click="resetBracket"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 fixed bottom-4 right-4 md:static md:bottom-0 md:right-0"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 fixed bottom-4 left-4"
       >
         Reset
       </button>
     </div>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-5 gap-12 md:mt-12 max-w-screen-2xl"
+      ref="bracket"
+      class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
     >
       <!-- Pre-Playoffs -->
       <div class="md:max-w-72">
@@ -356,6 +381,8 @@
 </template>
 
 <script>
+import html2canvas from "html2canvas";
+
 export default {
   props: {
     teams: {
@@ -577,6 +604,56 @@ export default {
 
       // Debugging log
       console.log("Bracket has been reset.");
+    },
+    async downloadBracket() {
+      const bracketElement = this.$refs.bracket;
+
+      if (!bracketElement) {
+        console.error("Bracket element not found!");
+        return;
+      }
+
+      try {
+        // Capture the bracket as a canvas
+        const canvas = await html2canvas(bracketElement, {
+          scale: 2, // Higher scale for better quality
+          useCORS: true, // Allow cross-origin images
+        });
+
+        // Get the canvas dimensions
+        const width = canvas.width;
+        const height = canvas.height;
+
+        // Create a new canvas to add text
+        const finalCanvas = document.createElement("canvas");
+        finalCanvas.width = width;
+        finalCanvas.height = height + 100; // Add space for the text at the bottom
+        const ctx = finalCanvas.getContext("2d");
+
+        // Draw the captured canvas onto the new canvas
+        ctx.drawImage(canvas, 0, 0);
+
+        // Add the website link below the bracket
+        ctx.fillStyle = "gray";
+        ctx.font = "40px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(
+          "Made with: https://jfreudenbe.github.io/oberliga-playoff/",
+          width / 2,
+          height + 50
+        );
+
+        // Convert the final canvas to a data URL
+        const dataURL = finalCanvas.toDataURL("image/png");
+
+        // Create a link to download the image
+        const link = document.createElement("a");
+        link.href = dataURL;
+        link.download = "playoff_bracket.png";
+        link.click();
+      } catch (error) {
+        console.error("Failed to generate bracket image:", error);
+      }
     },
   },
 };
