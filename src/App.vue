@@ -1,5 +1,5 @@
 <template>
-  <div class="p-12">
+  <div class="p-4 md:p-12">
     <div class="flex gap-x-12 flex-col">
       <TeamTable :teams="teams" class="mt-12 md:mt-0 w-screen" />
       <div class="w-full order-first">
