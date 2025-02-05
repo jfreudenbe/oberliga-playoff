@@ -4,9 +4,19 @@
   >
     Tabellen
   </h2>
+  <div
+    class="px-4 pb-2 flex text-xs md:text-sm justify-center md:justify-start"
+  >
+    <h3 class="bg-green-100 text-green-700 rounded-md px-2 py-0.5 mr-2">
+      Direkte Playoff Qualifikation
+    </h3>
+    <h3 class="bg-blue-100 text-blue-700 rounded-md px-2 py-0.5">
+      Pre Playoffs
+    </h3>
+  </div>
 
   <div
-    class="grid grid-cols-1 md:grid-cols-2 gap-x-12 mx-auto md:mx-0 md:max-w-xl px-4 pb-4"
+    class="grid grid-cols-1 md:grid-cols-2 gap-x-2 mx-auto md:mx-0 md:max-w-xl px-4 pb-4"
   >
     <table
       class="table-auto w-full border-collapse border border-gray-300 mb-6 md:max-w-64"
@@ -27,6 +37,10 @@
         >
           <td
             class="border border-gray-300 px-4 py-2 text-center text-xs text-gray-600"
+            :class="{
+              'bg-green-200 text-green-900': team.seed <= 12,
+              'bg-blue-200 text-blue-900': team.seed > 12 && team.seed <= 20,
+            }"
           >
             {{ team.seed }}
           </td>
@@ -57,6 +71,10 @@
         >
           <td
             class="border border-gray-300 px-4 py-2 text-center text-xs text-gray-600"
+            :class="{
+              'bg-green-200 text-green-900': team.seed <= 12,
+              'bg-blue-200 text-blue-900': team.seed > 12 && team.seed <= 20,
+            }"
           >
             {{ team.seed }}
           </td>

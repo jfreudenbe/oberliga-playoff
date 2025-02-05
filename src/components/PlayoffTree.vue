@@ -2,9 +2,7 @@
   <div
     class="p-4 relative pt-64 mb-20 md:py-36 bg-gray-50 text-balance overflow-hidden"
   >
-    <div class="w-full">
-      <!-- Image -->
-
+    <div class="w-full flex-col flex relative">
       <h1
         class="md:text-8xl text-5xl font-black text-gray-900 text-center uppercase font-bebas tracking-wide"
       >
@@ -19,7 +17,7 @@
         class="flex justify-center mt-12 gap-3 md:gap-6 font-roboto tracking-wider"
       >
         <div
-          class="fixed bottom-5 right-5 bg-black px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer"
+          class="fixed bottom-5 right-5 bg-black px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
           @click="downloadBracket"
         >
           <svg
@@ -36,7 +34,7 @@
           </svg>
         </div>
         <div
-          class="fixed bottom-5 left-5 bg-red-700 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-red-500 hover:cursor-pointer"
+          class="fixed bottom-5 left-5 bg-red-700 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-red-500 hover:cursor-pointer z-50"
           @click="resetBracket"
         >
           Reset
@@ -52,7 +50,7 @@
       <!-- Pre-Playoffs -->
       <div class="md:max-w-72">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
-          Pre-Playoffs
+          Pre-Playoffs (BO3)
         </h3>
         <div
           v-for="(match, index) in bracket.prePlayoffs"
@@ -107,7 +105,7 @@
       <!-- Achtelfinale -->
       <div class="md:max-w-72">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
-          Achtelfinale
+          Achtelfinale (BO5)
         </h3>
         <div
           v-for="(match, index) in bracket.achtelfinale"
@@ -176,7 +174,7 @@
       <!-- Viertelfinale -->
       <div class="md:max-w-72">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
-          Viertelfinale
+          Viertelfinale (BO7)
         </h3>
         <div
           v-for="(match, index) in bracket.viertelfinale"
@@ -246,7 +244,7 @@
       <!-- Halbfinale -->
       <div class="md:max-w-72">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
-          Halbfinale
+          Halbfinale (BO7)
         </h3>
         <div
           v-for="(match, index) in bracket.halbfinale"
@@ -315,7 +313,7 @@
       <!-- Finale -->
       <div class="md:max-w-72">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
-          Finale
+          Finale (BO7)
         </h3>
         <div v-if="bracket.finale.length && bracket.finale[0]">
           <div
