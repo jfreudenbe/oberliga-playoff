@@ -1,50 +1,50 @@
 <template>
-  <div class="overflow-auto p-4 md:py-24 bg-gray-50 text-balance">
-    <h1
-      class="md:text-6xl text-4xl font-black text-gray-800 text-center leading-tight"
-    >
-      Oberliga Playoff Prediction Tool
-    </h1>
-    <h2
-      class="text-center md:text-2xl text-lg leading-snug mt-4 text-gray-700 md:mt-6"
-    >
-      Simply choose the winner by clicking on the teams logo.
-    </h2>
-    <div
-      class="flex justify-center mt-12 gap-3 md:gap-6 flex-row md:w-full w-fit mx-auto"
-    >
-      <a class="relative" href="#" @click="downloadBracket">
-        <span
-          class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"
-        ></span>
-        <span
-          class="text-xs md:text-base text-center font-medium md:fold-bold relative inline-block h-full w-full md:font-bold rounded border-2 border-black bg-white px-3 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900"
+  <div
+    class="p-4 relative pt-64 mb-20 md:py-36 bg-gray-50 text-balance overflow-hidden"
+  >
+    <div class="w-full">
+      <!-- Image -->
+
+      <h1
+        class="md:text-8xl text-5xl font-black text-gray-900 text-center uppercase font-bebas tracking-wide"
+      >
+        Oberliga Playoff Prediction
+      </h1>
+      <h2
+        class="text-center md:text-2xl text-lg mt-4 md:mt-3 text-gray-700 tracking-tight font-roboto"
+      >
+        Click on a team’s logo to select a winner.
+      </h2>
+      <div
+        class="flex justify-center mt-12 gap-3 md:gap-6 font-roboto tracking-wider"
+      >
+        <div
+          class="fixed bottom-5 right-5 bg-black px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer"
+          @click="downloadBracket"
         >
-          Download Bracket as .png
-        </span>
-      </a>
-      <a class="relative w-fit" href="#" @click="resetBracket">
-        <span
-          class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-red-300"
-        ></span>
-        <span
-          class="text-center font-medium md:fold-bold relative inline-block h-full w-full rounded border-2 md:font-bold border-red-500 bg-red-50 px-3 py-1 text-xs md:text-base text-red-800 transition duration-100 hover:bg-red-400 hover:text-red-900"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div
+          class="fixed bottom-5 left-5 bg-red-700 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-red-500 hover:cursor-pointer"
+          @click="resetBracket"
         >
-          Reset Bracket
-        </span>
-      </a>
+          Reset
+        </div>
+      </div>
     </div>
   </div>
   <div>
-    <div class="flex md:justify-between justify-center items-center mb-12">
-      <button
-        @click="resetBracket"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 fixed bottom-4 left-4"
-      >
-        Reset
-      </button>
-    </div>
-
     <div
       ref="bracket"
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
@@ -616,8 +616,8 @@ export default {
       try {
         // Capture the bracket as a canvas
         const canvas = await html2canvas(bracketElement, {
-          scale: 2, // Higher scale for better quality
-          useCORS: true, // Allow cross-origin images
+          scale: 2,
+          useCORS: true,
         });
 
         // Get the canvas dimensions
