@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-4 relative pt-64 mb-20 md:py-36 bg-gray-50 text-balance overflow-hidden"
+    class="p-4 relative pt-48 mb-20 md:py-30 bg-white text-balance overflow-hidden"
   >
     <div class="w-full flex-col flex relative">
       <h1
@@ -17,7 +17,7 @@
         class="flex justify-center mt-12 gap-3 md:gap-6 font-roboto tracking-wider"
       >
         <div
-          class="fixed bottom-5 right-5 bg-black px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
+          class="fixed bottom-5 right-5 bg-gray-900 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
           @click="downloadBracket"
         >
           <svg
@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="bg-gray-50 py-12">
     <div
       ref="bracket"
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
@@ -58,7 +58,7 @@
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -113,7 +113,7 @@
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -182,7 +182,7 @@
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -252,7 +252,7 @@
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -317,7 +317,7 @@
         </h3>
         <div v-if="bracket.finale.length && bracket.finale[0]">
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-200 rounded-md shadow-md"
+            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
