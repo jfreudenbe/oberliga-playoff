@@ -1,7 +1,8 @@
-<template>
+<template class="w-screen">
   <div class="">
+    <Hero />
     <div class="flex gap-x-12 flex-col">
-      <TeamTable :teams="teams" class="mt-12 md:mt-0 w-screen" />
+      <TeamTable :teams="teams" />
       <div class="w-screen order-first">
         <PlayoffTree :teams="teams" />
       </div>
@@ -13,10 +14,12 @@
 import TeamTable from "./components/TeamTable.vue";
 import PlayoffTree from "./components/PlayoffTree.vue";
 import teamsData from "./teams.json";
+import Hero from "./components/Hero.vue";
 
 export default {
   name: "App",
   components: {
+    Hero,
     PlayoffTree,
     TeamTable,
   },
@@ -31,12 +34,6 @@ export default {
         finale: [[null, null]],
       },
     };
-  },
-
-  methods: {
-    simulatePrePlayoffs() {
-      this.bracket = generateBracket(this.teams);
-    },
   },
 };
 </script>
