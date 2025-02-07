@@ -1,4 +1,4 @@
-<template>
+<template class="overflow-x-hidden">
   <div class="flex justify-center gap-3 md:gap-6 font-roboto tracking-wider">
     <div
       class="fixed bottom-5 right-5 bg-gray-900 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
@@ -24,7 +24,7 @@
       Reset
     </div>
   </div>
-  <div class="bg-gray-50 py-12">
+  <div class="bg-gray-50 py-12 overflow-x-hidden">
     <div
       ref="bracket"
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"

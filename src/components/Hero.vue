@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="p-4 relative pt-48 mb-20 md:py-30 bg-white text-balance overflow-hidden"
-  >
+  <div class="p-4 relative py-32 bg-white text-balance overflow-hidden">
     <div class="w-full flex-col flex relative">
       <h1
         class="md:text-8xl text-5xl font-black text-gray-900 text-center uppercase font-bebas tracking-wide"
