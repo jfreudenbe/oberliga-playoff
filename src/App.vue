@@ -1,4 +1,4 @@
-<template>
+<template class="w-screen">
   <div class="">
     <Hero />
     <div class="flex gap-x-12 flex-col">
@@ -34,12 +34,6 @@ export default {
         finale: [[null, null]],
       },
     };
-  },
-
-  methods: {
-    simulatePrePlayoffs() {
-      this.bracket = generateBracket(this.teams);
-    },
   },
 };
 </script>
