@@ -1,45 +1,27 @@
 <template>
-  <div
-    class="p-4 relative pt-48 mb-20 md:py-30 bg-white text-balance overflow-hidden"
-  >
-    <div class="w-full flex-col flex relative">
-      <h1
-        class="md:text-8xl text-5xl font-black text-gray-900 text-center uppercase font-bebas tracking-wide"
+  <div class="flex justify-center gap-3 md:gap-6 font-roboto tracking-wider">
+    <div
+      class="fixed bottom-5 right-5 bg-gray-900 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
+      @click="downloadBracket"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-6"
       >
-        Oberliga Playoff Prediction
-      </h1>
-      <h2
-        class="text-center md:text-2xl text-lg mt-4 md:mt-3 text-gray-700 tracking-tight font-roboto"
-      >
-        Click on a team’s logo to select a winner.
-      </h2>
-      <div
-        class="flex justify-center mt-12 gap-3 md:gap-6 font-roboto tracking-wider"
-      >
-        <div
-          class="fixed bottom-5 right-5 bg-gray-900 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-gray-800 hover:cursor-pointer z-50"
-          @click="downloadBracket"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-        <div
-          class="fixed bottom-5 left-5 bg-red-700 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-red-500 hover:cursor-pointer z-50"
-          @click="resetBracket"
-        >
-          Reset
-        </div>
-      </div>
+        <path
+          fill-rule="evenodd"
+          d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </div>
+    <div
+      class="fixed bottom-5 left-5 bg-red-700 px-5 py-2 text-lg font-bold uppercase text-white transition hover:bg-red-500 hover:cursor-pointer z-50"
+      @click="resetBracket"
+    >
+      Reset
     </div>
   </div>
   <div class="bg-gray-50 py-12">
@@ -68,16 +50,14 @@
                 class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`prePlayoffs-${index}`] === match[0].name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`prePlayoffs-${index}`] &&
-                    decidedMatches[`prePlayoffs-${index}`] !== match[0].name,
-                  '': !decidedMatches[`prePlayoffs-${index}`],
+                    prePlayoffWinners.get(index) == match[0],
+                  'opacity-50 saturate-50':
+                    prePlayoffWinners.has(index) &&
+                    prePlayoffWinners.get(index) !== match[0],
                 }"
-                @click="advanceTeam(match[0], 'prePlayoffs', index)"
+                @click="handleLogoClick(match[0], 'PrePlayoffs', index)"
               />
             </div>
-
             <!-- VS -->
             <div class="text-gray-600">vs</div>
 
@@ -89,13 +69,12 @@
                 class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`prePlayoffs-${index}`] === match[1].name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`prePlayoffs-${index}`] &&
-                    decidedMatches[`prePlayoffs-${index}`] !== match[1].name,
-                  '': !decidedMatches[`prePlayoffs-${index}`],
+                    prePlayoffWinners.get(index) == match[1],
+                  'opacity-50 saturate-50':
+                    prePlayoffWinners.has(index) &&
+                    prePlayoffWinners.get(index) !== match[1],
                 }"
-                @click="advanceTeam(match[1], 'prePlayoffs', index)"
+                @click="handleLogoClick(match[1], 'PrePlayoffs', index)"
               />
             </div>
           </div>
@@ -124,13 +103,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`achtelfinale-${index}`] === match[0].name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`achtelfinale-${index}`] &&
-                    decidedMatches[`achtelfinale-${index}`] !== match[0].name,
-                  '': !decidedMatches[`achtelfinale-${index}`],
+                    viertelfinaleCandidates.get(index) == match[0],
+                  'opacity-50 saturate-50':
+                    viertelfinaleCandidates.has(index) &&
+                    viertelfinaleCandidates.get(index) !== match[0],
                 }"
-                @click="advanceTeam(match[0], 'achtelfinale', index)"
+                @click="handleLogoClick(match[0], 'achtelfinale', index)"
               />
               <div
                 v-else
@@ -152,13 +130,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`achtelfinale-${index}`] === match[1].name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`achtelfinale-${index}`] &&
-                    decidedMatches[`achtelfinale-${index}`] !== match[1].name,
-                  '': !decidedMatches[`achtelfinale-${index}`],
+                    viertelfinaleCandidates.get(index) == match[1],
+                  'opacity-50 saturate-50':
+                    viertelfinaleCandidates.has(index) &&
+                    viertelfinaleCandidates.get(index) !== match[1],
                 }"
-                @click="advanceTeam(match[1], 'achtelfinale', index)"
+                @click="handleLogoClick(match[1], 'achtelfinale', index)"
               />
               <div
                 v-else
@@ -193,13 +170,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`viertelfinale-${index}`] === match[0]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`viertelfinale-${index}`] &&
-                    decidedMatches[`viertelfinale-${index}`] !== match[0]?.name,
-                  '': !decidedMatches[`viertelfinale-${index}`],
+                    halbfinaleCandidates.get(index) == match[0],
+                  'opacity-50 saturate-50':
+                    halbfinaleCandidates.has(index) &&
+                    halbfinaleCandidates.get(index) !== match[0],
                 }"
-                @click="advanceTeam(match[0], 'viertelfinale', index)"
+                @click="handleLogoClick(match[0], 'viertelfinale', index)"
               />
               <div
                 v-else
@@ -221,13 +197,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`viertelfinale-${index}`] === match[1]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`viertelfinale-${index}`] &&
-                    decidedMatches[`viertelfinale-${index}`] !== match[1]?.name,
-                  '': !decidedMatches[`viertelfinale-${index}`],
+                    halbfinaleCandidates.get(index) == match[1],
+                  'opacity-50 saturate-50':
+                    halbfinaleCandidates.has(index) &&
+                    halbfinaleCandidates.get(index) !== match[1],
                 }"
-                @click="advanceTeam(match[1], 'viertelfinale', index)"
+                @click="handleLogoClick(match[1], 'viertelfinale', index)"
               />
 
               <div
@@ -263,13 +238,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`halbfinale-${index}`] === match[0]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`halbfinale-${index}`] &&
-                    decidedMatches[`halbfinale-${index}`] !== match[0]?.name,
-                  '': !decidedMatches[`halbfinale-${index}`],
+                    finaleCandidates.get(index) == match[0],
+                  'opacity-50 saturate-50':
+                    finaleCandidates.has(index) &&
+                    finaleCandidates.get(index) !== match[0],
                 }"
-                @click="advanceTeam(match[0], 'halbfinale', index)"
+                @click="handleLogoClick(match[0], 'halbfinale', index)"
               />
               <div
                 v-else
@@ -291,13 +265,12 @@
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches[`halbfinale-${index}`] === match[1]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches[`halbfinale-${index}`] &&
-                    decidedMatches[`halbfinale-${index}`] !== match[1]?.name,
-                  '': !decidedMatches[`halbfinale-${index}`],
+                    finaleCandidates.get(index) == match[1],
+                  'opacity-50 saturate-50':
+                    finaleCandidates.has(index) &&
+                    finaleCandidates.get(index) !== match[1],
                 }"
-                @click="advanceTeam(match[1], 'halbfinale', index)"
+                @click="handleLogoClick(match[1], 'halbfinale', index)"
               />
               <div
                 v-else
@@ -315,26 +288,24 @@
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Finale (BO7)
         </h3>
-        <div v-if="bracket.finale.length && bracket.finale[0]">
+        <div v-for="(match, index) in bracket.finale" :key="'finale-' + index">
           <div
             class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
               <img
-                v-if="bracket.finale[0][0]"
-                :src="bracket.finale[0][0]?.logo || ''"
-                :alt="bracket.finale[0][0]?.name || 'TBD'"
+                v-if="match[0]"
+                :src="match[0]?.logo || ''"
+                :alt="match[0]?.name || 'TBD'"
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches['finale-0'] === bracket.finale[0][0]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches['finale-0'] &&
-                    decidedMatches['finale-0'] !== bracket.finale[0][0]?.name,
-                  '': !decidedMatches['finale-0'],
+                    winner.get(index) == match[0],
+                  'opacity-50 saturate-50':
+                    winner.has(index) && winner.get(index) !== match[0],
                 }"
-                @click="advanceTeam(bracket.finale[0][0], 'finale', 0)"
+                @click="handleLogoClick(match[0], 'finale', index)"
               />
               <div
                 v-else
@@ -350,19 +321,17 @@
             <!-- Team 2 -->
             <div class="flex flex-col items-center">
               <img
-                v-if="bracket.finale[0][1]"
-                :src="bracket.finale[0][1]?.logo || ''"
-                :alt="bracket.finale[0][1]?.name || 'TBD'"
+                v-if="match[1]"
+                :src="match[1]?.logo || ''"
+                :alt="match[1]?.name || 'TBD'"
                 class="h-12 w-12 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
                   'saturate-150 pointer-events-none scale-125':
-                    decidedMatches['finale-0'] === bracket.finale[0][1]?.name,
-                  'opacity-50 saturate-50 pointer-events-none':
-                    !!decidedMatches['finale-0'] &&
-                    decidedMatches['finale-0'] !== bracket.finale[0][1]?.name,
-                  '': !decidedMatches['finale-0'],
+                    winner.get(index) == match[1],
+                  'opacity-50 saturate-50':
+                    winner.has(index) && winner.get(index) !== match[1],
                 }"
-                @click="advanceTeam(bracket.finale[0][1], 'finale', 0)"
+                @click="handleLogoClick(match[1], 'finale', index)"
               />
               <div
                 v-else
@@ -397,11 +366,11 @@ export default {
         halbfinale: new Array(2).fill(null).map(() => [null, null]),
         finale: [[null, null]],
       },
-      decidedMatches: {}, // Tracks which matches have been decided
-      prePlayoffWinners: [], // Stores winners of pre-playoff matches
-      viertelfinaleCandidates: [], // Stores winners of Achtelfinale
-      halbfinaleCandidates: [], // Stores winners of Viertelfinale
-      finaleCandidates: [], // Stores winners of Halbfinale
+      prePlayoffWinners: new Map(), // Stores winners of pre-playoff matches
+      viertelfinaleCandidates: new Map(), // Stores winners of Achtelfinale
+      halbfinaleCandidates: new Map(), // Stores winners of Viertelfinale
+      finaleCandidates: new Map(), // Stores winners of Halbfinale
+      winner: new Map(),
     };
   },
   created() {
@@ -439,143 +408,343 @@ export default {
       ];
       this.bracket.achtelfinale = achtelfinale;
     },
-    advanceTeam(team, round, matchIndex) {
-      const matchKey = `${round}-${matchIndex}`;
+    handleLogoClick(team, round, index) {
+      console.log(team.name);
+      console.log(round);
+      console.log(index);
 
-      if (this.decidedMatches[matchKey]) return;
+      let prePlayoffsComplete = false;
+      let achtelfinaleComplete = false;
+      let viertelfinaleComplete = false;
+      let halbfinaleComplete = false;
+      let finaleComplete = false;
 
-      this.decidedMatches = {
-        ...this.decidedMatches,
-        [matchKey]: team.name,
-      };
-
-      if (round === "prePlayoffs") {
-        if (!this.prePlayoffWinners.includes(team)) {
-          this.prePlayoffWinners.push(team);
+      if (round === "PrePlayoffs") {
+        if (team.name !== 0) {
+          if (!this.prePlayoffWinners.has(index)) {
+            //add index with team
+            console.log("Adding " + team.name);
+            this.prePlayoffWinners.set(index, team);
+            console.log(
+              this.prePlayoffWinners.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          } else {
+            //check if index is already in the map
+            //Delete name at index
+            console.log("Deleting " + this.prePlayoffWinners.get(index));
+            this.prePlayoffWinners.delete(index);
+            //add new name at index
+            console.log("Adding " + team);
+            this.prePlayoffWinners.set(index, team);
+            //log map
+            console.log(
+              this.prePlayoffWinners.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+            if (this.prePlayoffWinners.size === 4) {
+              this.assignPrePlayoffWinners();
+              this.initializeAchtelfinale();
+              this.viertelfinaleCandidates.clear();
+              this.initializeViertelfinale();
+              this.halbfinaleCandidates.clear();
+              this.initializeHalbfinale();
+              this.finaleCandidates.clear();
+              this.winner.clear();
+              this.initializeFinale();
+            }
+          }
         }
 
-        if (this.prePlayoffWinners.length === 4) {
+        if (this.prePlayoffWinners.size === 4) {
+          prePlayoffsComplete = true;
           this.assignPrePlayoffWinners();
         }
-      } else if (round === "achtelfinale") {
-        if (!this.viertelfinaleCandidates.includes(team)) {
-          this.viertelfinaleCandidates.push(team);
+      }
+
+      if (prePlayoffsComplete) {
+        this.assignPrePlayoffWinners();
+      }
+
+      if (round == "achtelfinale") {
+        if (team.name !== "TBD") {
+          if (!this.viertelfinaleCandidates.has(index)) {
+            //add index with team
+            console.log("Adding " + team.name);
+            this.viertelfinaleCandidates.set(index, team);
+            console.log(
+              this.viertelfinaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          } else {
+            //check if index is already in the map
+            //Delete name at index
+            console.log("Deleting " + this.viertelfinaleCandidates.get(index));
+            this.viertelfinaleCandidates.delete(index);
+            //add new name at index
+            console.log("Adding " + team);
+            this.viertelfinaleCandidates.set(index, team);
+            //log map
+            console.log(
+              this.viertelfinaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+            if (this.viertelfinaleCandidates.size === 8) {
+              this.assignViertelfinale();
+              this.initializeViertelfinale();
+              this.halbfinaleCandidates.clear();
+              this.initializeHalbfinale();
+              this.finaleCandidates.clear();
+              this.initializeFinale();
+              this.winner.clear();
+            }
+          }
         }
 
-        if (this.viertelfinaleCandidates.length === 8) {
+        if (this.viertelfinaleCandidates.size === 8) {
           this.assignViertelfinale();
         }
-      } else if (round === "viertelfinale") {
-        if (!this.halbfinaleCandidates) this.halbfinaleCandidates = [];
-        if (!this.halbfinaleCandidates.includes(team)) {
-          this.halbfinaleCandidates.push(team);
-        }
+      }
 
-        if (this.halbfinaleCandidates.length === 4) {
-          this.assignHalbfinale();
+      if (round == "viertelfinale") {
+        console.log("HERE VF");
+        if (team.name !== "TBD") {
+          if (!this.halbfinaleCandidates.has(index)) {
+            //add index with team
+            console.log("Adding " + team.name);
+            this.halbfinaleCandidates.set(index, team);
+            console.log(
+              this.halbfinaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          } else {
+            //check if index is already in the map
+            //Delete name at index
+            console.log("Deleting " + this.halbfinaleCandidates.get(index));
+            this.halbfinaleCandidates.delete(index);
+            //add new name at index
+            console.log("Adding " + team);
+            this.halbfinaleCandidates.set(index, team);
+            //log map
+            console.log(
+              this.halbfinaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+            if (this.viertelfinaleCandidates.size === 8) {
+              this.assignHalbfinale();
+              this.initializeHalbfinale();
+              this.finaleCandidates.clear();
+              this.initializeFinale();
+              this.winner.clear();
+            }
+          }
+          console.log("size" + this.halbfinaleCandidates.size);
+          if (this.halbfinaleCandidates.size === 4) {
+            viertelfinaleComplete = true;
+            this.assignHalbfinale();
+          }
         }
-      } else if (round === "halbfinale") {
-        if (!this.finaleCandidates) this.finaleCandidates = [];
-        if (!this.finaleCandidates.includes(team)) {
-          this.finaleCandidates.push(team);
-        }
+      }
 
-        if (this.finaleCandidates.length === 2) {
-          this.assignFinale();
+      if (round == "halbfinale") {
+        if (team.name !== "TBD") {
+          if (!this.finaleCandidates.has(index)) {
+            //add index with team
+            console.log("Adding " + team.name);
+            this.finaleCandidates.set(index, team);
+            console.log(
+              this.finaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          } else {
+            //check if index is already in the map
+            //Delete name at index
+            console.log("Deleting " + this.finaleCandidates.get(index));
+            this.finaleCandidates.delete(index);
+            //add new name at index
+            console.log("Adding " + team);
+            this.finaleCandidates.set(index, team);
+            //log map
+            console.log(
+              this.finaleCandidates.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+            if (halbfinaleComplete) {
+              this.assignFinale();
+              this.initializeFinale();
+              this.winner.clear();
+            }
+          }
+          console.log("size" + this.finaleCandidates.size);
+          if (this.finaleCandidates.size === 2) {
+            halbfinaleComplete = true;
+            this.assignFinale();
+          }
+        }
+      }
+
+      if (round == "finale") {
+        console.log("HERE FINAL");
+        if (team.name !== "TBD") {
+          if (!this.winner.has(index)) {
+            //add index with team
+            console.log("Adding " + team.name);
+            this.winner.set(index, team);
+            console.log(
+              this.winner.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          } else {
+            //check if index is already in the map
+            //Delete name at index
+            console.log("Deleting " + this.winner.get(index));
+            this.winner.delete(index);
+            //add new name at index
+            console.log("Adding " + team);
+            this.winner.set(index, team);
+            //log map
+            console.log(
+              this.winner.forEach((value, key) => {
+                console.log(key + " = " + value);
+              })
+            );
+          }
+          console.log("size" + this.winner.size);
         }
       }
     },
     assignPrePlayoffWinners() {
-      // Separate Nord and Süd teams from prePlayoffWinners
-      const nordTeams = this.prePlayoffWinners.filter((team) =>
-        this.teams.nord.some((nordTeam) => nordTeam.name === team.name)
-      );
-      const südTeams = this.prePlayoffWinners.filter((team) =>
-        this.teams.süd.some((südTeam) => südTeam.name === team.name)
-      );
+      const nordTeams = [];
+      const südTeams = [];
 
-      // Sort both groups by their seed (lower is better)
-      nordTeams.sort((a, b) => b.seed - a.seed);
-      südTeams.sort((a, b) => b.seed - a.seed);
+      //add index 0 and 1 to südTeams
+      südTeams.push(this.prePlayoffWinners.get(0));
+      südTeams.push(this.prePlayoffWinners.get(1));
 
-      // Create an alternating order: odd (Nord), even (Süd)
-      const alternatingOrder = [];
-      for (let i = 0; i < Math.max(nordTeams.length, südTeams.length); i++) {
-        if (südTeams[i]) alternatingOrder.push(südTeams[i]); // Even positions: Süd
-        if (nordTeams[i]) alternatingOrder.push(nordTeams[i]); // Odd positions: Nord
+      //add index 2 and 3 to nordTeams
+      nordTeams.push(this.prePlayoffWinners.get(2));
+      nordTeams.push(this.prePlayoffWinners.get(3));
+
+      if (südTeams[0].seed > südTeams[1].seed) {
+        südTeams.reverse();
       }
 
-      // Update prePlayoffWinners with the new order
-      this.prePlayoffWinners = alternatingOrder;
+      if (nordTeams[0].seed > nordTeams[1].seed) {
+        nordTeams.reverse();
+      }
 
-      // Debugging logs
-      console.log("Nord Teams:", nordTeams);
-      console.log("Süd Teams:", südTeams);
-      console.log("Final Alternating Order:", this.prePlayoffWinners);
+      this.bracket.achtelfinale[0][1] = südTeams[1]; // Worst seed plays Nord #1 (Tilburg)
+      this.bracket.achtelfinale[1][1] = nordTeams[1]; // Second worst seed plays Süd #1 (Bietigheim)
+      this.bracket.achtelfinale[2][1] = südTeams[0]; // Second best seed plays Nord #2 (Hannover Scorpions)
+      this.bracket.achtelfinale[3][1] = nordTeams[0]; // Best seed plays Süd #2 (Heilbronn)
 
-      const sortedWinners = this.prePlayoffWinners;
-
-      this.bracket.achtelfinale[0][1] = sortedWinners[0]; // Worst seed plays Nord #1 (Tilburg)
-      this.bracket.achtelfinale[1][1] = sortedWinners[1]; // Second worst seed plays Süd #1 (Bietigheim)
-      this.bracket.achtelfinale[2][1] = sortedWinners[2]; // Second best seed plays Nord #2 (Hannover Scorpions)
-      this.bracket.achtelfinale[3][1] = sortedWinners[3]; // Best seed plays Süd #2 (Heilbronn)
-
-      this.prePlayoffWinners = [];
+      //log achtelfinale
+      console.log(this.bracket.achtelfinale[0][1]);
+      console.log(this.bracket.achtelfinale[1][1]);
+      console.log(this.bracket.achtelfinale[2][1]);
+      console.log(this.bracket.achtelfinale[3][1]);
     },
     assignViertelfinale() {
-      this.viertelfinaleCandidates.sort((a, b) => {
+      console.log("HERE");
+      //get all teams from map vieertelfinaleCandidates and put in array
+
+      const viertelfinaleTeams = Array.from(
+        this.viertelfinaleCandidates.values()
+      );
+
+      //sort array by seed
+      viertelfinaleTeams.sort((a, b) => {
         return a.seed - b.seed;
       });
 
-      const sortedCandidates = this.viertelfinaleCandidates;
+      console.log(viertelfinaleTeams);
+
       this.bracket.viertelfinale[0] = [
-        sortedCandidates[0],
-        sortedCandidates[7],
+        viertelfinaleTeams[0],
+        viertelfinaleTeams[7],
       ];
       this.bracket.viertelfinale[1] = [
-        sortedCandidates[1],
-        sortedCandidates[6],
+        viertelfinaleTeams[1],
+        viertelfinaleTeams[6],
       ];
       this.bracket.viertelfinale[2] = [
-        sortedCandidates[2],
-        sortedCandidates[5],
+        viertelfinaleTeams[2],
+        viertelfinaleTeams[5],
       ];
       this.bracket.viertelfinale[3] = [
-        sortedCandidates[3],
-        sortedCandidates[4],
+        viertelfinaleTeams[3],
+        viertelfinaleTeams[4],
       ];
-
-      this.viertelfinaleCandidates = [];
     },
 
     assignHalbfinale() {
-      this.halbfinaleCandidates.sort((a, b) => {
+      console.log("ASGINIGN SEMI FINAL");
+      //get all teams from map halbfinaleCandidates and put in array
+      const halbfinaleTeams = Array.from(this.halbfinaleCandidates.values());
+
+      //log halbfinaleTeams
+      console.log(halbfinaleTeams);
+
+      halbfinaleTeams.sort((a, b) => {
         return a.seed - b.seed;
       });
-
-      const sortedCandidates = this.halbfinaleCandidates;
-      this.bracket.halbfinale[0] = [sortedCandidates[0], sortedCandidates[3]]; // Best vs Worst
-      this.bracket.halbfinale[1] = [sortedCandidates[1], sortedCandidates[2]]; // Second best vs Third best
-
-      this.halbfinaleCandidates = [];
+      this.bracket.halbfinale[0] = [halbfinaleTeams[0], halbfinaleTeams[3]]; // Best vs Worst
+      this.bracket.halbfinale[1] = [halbfinaleTeams[1], halbfinaleTeams[2]]; // Second best vs Third best
     },
 
     assignFinale() {
-      this.finaleCandidates.sort((a, b) => {
+      console.log("ASGINIGN FINAL");
+      //get all teams from map finaleCandidates and put in array
+      const finaleTeams = Array.from(this.finaleCandidates.values());
+
+      finaleTeams.sort((a, b) => {
         return a.seed - b.seed;
       });
 
-      const sortedCandidates = this.finaleCandidates;
-      this.bracket.finale[0] = [sortedCandidates[0], sortedCandidates[1]]; // Best vs Second best
-
-      this.finaleCandidates = [];
+      this.bracket.finale[0] = [finaleTeams[0], finaleTeams[1]]; // Best vs Second best
     },
+
+    initializeAchtelfinale() {
+      this.bracket.achtelfinale = [
+        [this.teams.nord[0], { name: "TBD" }], // Nord 1 vs TBD
+        [this.teams.süd[0], { name: "TBD" }], // Süd 1 vs TBD
+        [this.teams.nord[1], { name: "TBD" }], // Nord 2 vs TBD
+        [this.teams.süd[1], { name: "TBD" }], // Süd 2 vs TBD
+        [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
+        [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
+        [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
+        [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
+      ];
+    },
+
+    initializeViertelfinale() {
+      this.bracket.viertelfinale = new Array(4)
+        .fill(null)
+        .map(() => [null, null]);
+    },
+
+    initializeHalbfinale() {
+      this.bracket.halbfinale = new Array(2).fill(null).map(() => [null, null]);
+    },
+
+    initializeFinale() {
+      this.bracket.finale = [[null, null]];
+    },
+
     resetBracket() {
-      this.decidedMatches = {}; // Clear all decided matches
-      this.prePlayoffWinners = []; // Clear pre-playoff winners
-      this.viertelfinaleCandidates = []; // Clear Viertelfinale candidates
-      this.halbfinaleCandidates = []; // Clear Halbfinale candidates
-      this.finaleCandidates = []; // Clear Finale candidates
+      this.prePlayoffWinners.clear();
+      this.viertelfinaleCandidates.clear();
+      this.halbfinaleCandidates.clear();
+      this.finaleCandidates.clear();
 
       // Reinitialize the bracket
       this.bracket = {
