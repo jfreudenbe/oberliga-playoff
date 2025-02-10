@@ -1,7 +1,7 @@
 <template class="w-screen">
   <div class="">
     <Hero />
-    <div class="flex gap-x-12 flex-col">
+    <div class="flex gap-x-12 flex-col mb-24">
       <TeamTable :teams="teams" />
       <div class="w-screen order-first">
         <PlayoffTree :teams="teams" />

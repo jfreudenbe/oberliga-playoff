@@ -409,41 +409,18 @@ export default {
       this.bracket.achtelfinale = achtelfinale;
     },
     handleLogoClick(team, round, index) {
-      console.log(team.name);
-      console.log(round);
-      console.log(index);
-
       let prePlayoffsComplete = false;
-      let achtelfinaleComplete = false;
       let viertelfinaleComplete = false;
       let halbfinaleComplete = false;
-      let finaleComplete = false;
 
       if (round === "PrePlayoffs") {
         if (team.name !== 0) {
           if (!this.prePlayoffWinners.has(index)) {
-            //add index with team
-            console.log("Adding " + team.name);
             this.prePlayoffWinners.set(index, team);
-            console.log(
-              this.prePlayoffWinners.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           } else {
-            //check if index is already in the map
-            //Delete name at index
-            console.log("Deleting " + this.prePlayoffWinners.get(index));
             this.prePlayoffWinners.delete(index);
-            //add new name at index
-            console.log("Adding " + team);
             this.prePlayoffWinners.set(index, team);
-            //log map
-            console.log(
-              this.prePlayoffWinners.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
+
             if (this.prePlayoffWinners.size === 4) {
               this.assignPrePlayoffWinners();
               this.initializeAchtelfinale();
@@ -471,28 +448,11 @@ export default {
       if (round == "achtelfinale") {
         if (team.name !== "TBD") {
           if (!this.viertelfinaleCandidates.has(index)) {
-            //add index with team
-            console.log("Adding " + team.name);
             this.viertelfinaleCandidates.set(index, team);
-            console.log(
-              this.viertelfinaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           } else {
-            //check if index is already in the map
-            //Delete name at index
-            console.log("Deleting " + this.viertelfinaleCandidates.get(index));
             this.viertelfinaleCandidates.delete(index);
-            //add new name at index
-            console.log("Adding " + team);
             this.viertelfinaleCandidates.set(index, team);
-            //log map
-            console.log(
-              this.viertelfinaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
+
             if (this.viertelfinaleCandidates.size === 8) {
               this.assignViertelfinale();
               this.initializeViertelfinale();
@@ -511,31 +471,13 @@ export default {
       }
 
       if (round == "viertelfinale") {
-        console.log("HERE VF");
         if (team.name !== "TBD") {
           if (!this.halbfinaleCandidates.has(index)) {
-            //add index with team
-            console.log("Adding " + team.name);
             this.halbfinaleCandidates.set(index, team);
-            console.log(
-              this.halbfinaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           } else {
-            //check if index is already in the map
-            //Delete name at index
-            console.log("Deleting " + this.halbfinaleCandidates.get(index));
             this.halbfinaleCandidates.delete(index);
-            //add new name at index
-            console.log("Adding " + team);
             this.halbfinaleCandidates.set(index, team);
-            //log map
-            console.log(
-              this.halbfinaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
+
             if (this.viertelfinaleCandidates.size === 8) {
               this.assignHalbfinale();
               this.initializeHalbfinale();
@@ -544,7 +486,6 @@ export default {
               this.winner.clear();
             }
           }
-          console.log("size" + this.halbfinaleCandidates.size);
           if (this.halbfinaleCandidates.size === 4) {
             viertelfinaleComplete = true;
             this.assignHalbfinale();
@@ -555,35 +496,18 @@ export default {
       if (round == "halbfinale") {
         if (team.name !== "TBD") {
           if (!this.finaleCandidates.has(index)) {
-            //add index with team
-            console.log("Adding " + team.name);
             this.finaleCandidates.set(index, team);
-            console.log(
-              this.finaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           } else {
-            //check if index is already in the map
-            //Delete name at index
-            console.log("Deleting " + this.finaleCandidates.get(index));
             this.finaleCandidates.delete(index);
-            //add new name at index
-            console.log("Adding " + team);
+
             this.finaleCandidates.set(index, team);
-            //log map
-            console.log(
-              this.finaleCandidates.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
+
             if (halbfinaleComplete) {
               this.assignFinale();
               this.initializeFinale();
               this.winner.clear();
             }
           }
-          console.log("size" + this.finaleCandidates.size);
           if (this.finaleCandidates.size === 2) {
             halbfinaleComplete = true;
             this.assignFinale();
@@ -592,33 +516,13 @@ export default {
       }
 
       if (round == "finale") {
-        console.log("HERE FINAL");
         if (team.name !== "TBD") {
           if (!this.winner.has(index)) {
-            //add index with team
-            console.log("Adding " + team.name);
             this.winner.set(index, team);
-            console.log(
-              this.winner.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           } else {
-            //check if index is already in the map
-            //Delete name at index
-            console.log("Deleting " + this.winner.get(index));
             this.winner.delete(index);
-            //add new name at index
-            console.log("Adding " + team);
             this.winner.set(index, team);
-            //log map
-            console.log(
-              this.winner.forEach((value, key) => {
-                console.log(key + " = " + value);
-              })
-            );
           }
-          console.log("size" + this.winner.size);
         }
       }
     },
@@ -646,17 +550,8 @@ export default {
       this.bracket.achtelfinale[1][1] = nordTeams[1]; // Second worst seed plays Süd #1 (Bietigheim)
       this.bracket.achtelfinale[2][1] = südTeams[0]; // Second best seed plays Nord #2 (Hannover Scorpions)
       this.bracket.achtelfinale[3][1] = nordTeams[0]; // Best seed plays Süd #2 (Heilbronn)
-
-      //log achtelfinale
-      console.log(this.bracket.achtelfinale[0][1]);
-      console.log(this.bracket.achtelfinale[1][1]);
-      console.log(this.bracket.achtelfinale[2][1]);
-      console.log(this.bracket.achtelfinale[3][1]);
     },
     assignViertelfinale() {
-      console.log("HERE");
-      //get all teams from map vieertelfinaleCandidates and put in array
-
       const viertelfinaleTeams = Array.from(
         this.viertelfinaleCandidates.values()
       );
@@ -665,8 +560,6 @@ export default {
       viertelfinaleTeams.sort((a, b) => {
         return a.seed - b.seed;
       });
-
-      console.log(viertelfinaleTeams);
 
       this.bracket.viertelfinale[0] = [
         viertelfinaleTeams[0],
@@ -687,12 +580,7 @@ export default {
     },
 
     assignHalbfinale() {
-      console.log("ASGINIGN SEMI FINAL");
-      //get all teams from map halbfinaleCandidates and put in array
       const halbfinaleTeams = Array.from(this.halbfinaleCandidates.values());
-
-      //log halbfinaleTeams
-      console.log(halbfinaleTeams);
 
       halbfinaleTeams.sort((a, b) => {
         return a.seed - b.seed;
@@ -702,8 +590,6 @@ export default {
     },
 
     assignFinale() {
-      console.log("ASGINIGN FINAL");
-      //get all teams from map finaleCandidates and put in array
       const finaleTeams = Array.from(this.finaleCandidates.values());
 
       finaleTeams.sort((a, b) => {
@@ -768,9 +654,6 @@ export default {
         halbfinale: new Array(2).fill(null).map(() => [null, null]),
         finale: [[null, null]],
       };
-
-      // Debugging log
-      console.log("Bracket has been reset.");
     },
     async downloadBracket() {
       const bracketElement = this.$refs.bracket;
