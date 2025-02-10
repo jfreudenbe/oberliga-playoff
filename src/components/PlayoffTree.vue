@@ -24,13 +24,15 @@
       Reset
     </div>
   </div>
-  <div class="bg-gray-50 py-12 overflow-x-hidden">
+  <div
+    ref="bracket"
+    class="bg-gray-50 py-12 overflow-x-hidden motion-preset-fade"
+  >
     <div
-      ref="bracket"
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
     >
       <!-- Pre-Playoffs -->
-      <div class="md:max-w-72">
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Pre-Playoffs (BO3)
         </h3>
@@ -40,7 +42,7 @@
           class="mb-4"
         >
           <div
-            class="flex justify-around items-center p-2 py-3 border border-gray-300 rounded-md shadow-md bg-white"
+            class="flex justify-around items-center p-2 py-3 rounded-md shadow-md bg-white border border-gray-300"
           >
             <!-- Team 1 -->
             <div class="flex flex-col items-center">
@@ -49,7 +51,7 @@
                 :alt="match[0]?.name || 'TBD'"
                 class="h-12 w-12 p-0.5 object-contain cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                 :class="{
-                  'saturate-150 pointer-events-none scale-125':
+                  'saturate-150 pointer-events-none scale-125  ':
                     prePlayoffWinners.get(index) == match[0],
                   'opacity-50 saturate-50':
                     prePlayoffWinners.has(index) &&
@@ -82,7 +84,7 @@
       </div>
 
       <!-- Achtelfinale -->
-      <div class="md:max-w-72">
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Achtelfinale (BO5)
         </h3>
@@ -149,7 +151,7 @@
       </div>
 
       <!-- Viertelfinale -->
-      <div class="md:max-w-72">
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Viertelfinale (BO7)
         </h3>
@@ -217,7 +219,7 @@
       </div>
 
       <!-- Halbfinale -->
-      <div class="md:max-w-72">
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Halbfinale (BO7)
         </h3>
@@ -284,7 +286,7 @@
       </div>
 
       <!-- Finale -->
-      <div class="md:max-w-72">
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Finale (BO7)
         </h3>
@@ -657,33 +659,57 @@ export default {
     },
     async downloadBracket() {
       const bracketElement = this.$refs.bracket;
-
       if (!bracketElement) {
         console.error("Bracket element not found!");
         return;
       }
+
+      // Collect all elements that might have a class containing "motion-"
+      // (Include the bracket element itself plus all descendants)
+      const elementsWithMotion = [
+        bracketElement,
+        ...bracketElement.querySelectorAll('[class*="motion-"]'),
+      ];
+
+      // Prepare a list to store removed classes so we can reassign them later.
+      const removedMotionClasses = [];
+
+      // Remove all classes containing "motion-" and store them
+      elementsWithMotion.forEach((el) => {
+        // Find classes that include the substring "motion-"
+        const classesToRemove = Array.from(el.classList).filter((cls) =>
+          cls.includes("motion-")
+        );
+        if (classesToRemove.length > 0) {
+          removedMotionClasses.push({ element: el, classes: classesToRemove });
+          classesToRemove.forEach((cls) => el.classList.remove(cls));
+        }
+      });
+
+      // Optional: Wait a tick to allow the browser to apply the removal of classes
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       try {
         // Capture the bracket as a canvas
         const canvas = await html2canvas(bracketElement, {
           scale: 2,
           useCORS: true,
+          backgroundColor: null, // keep transparency if desired
         });
 
-        // Get the canvas dimensions
         const width = canvas.width;
         const height = canvas.height;
 
-        // Create a new canvas to add text
+        // Create a new canvas to add extra text below the bracket
         const finalCanvas = document.createElement("canvas");
         finalCanvas.width = width;
-        finalCanvas.height = height + 100; // Add space for the text at the bottom
+        finalCanvas.height = height + 100; // extra space for the text at the bottom
         const ctx = finalCanvas.getContext("2d");
 
         // Draw the captured canvas onto the new canvas
         ctx.drawImage(canvas, 0, 0);
 
-        // Add the website link below the bracket
+        // Add your website link below the bracket
         ctx.fillStyle = "gray";
         ctx.font = "40px Arial";
         ctx.textAlign = "center";
@@ -693,16 +719,19 @@ export default {
           height + 50
         );
 
-        // Convert the final canvas to a data URL
+        // Convert the final canvas to a data URL and trigger download
         const dataURL = finalCanvas.toDataURL("image/png");
-
-        // Create a link to download the image
         const link = document.createElement("a");
         link.href = dataURL;
         link.download = "playoff_bracket.png";
         link.click();
       } catch (error) {
         console.error("Failed to generate bracket image:", error);
+      } finally {
+        // Restore the previously removed "motion-" classes
+        removedMotionClasses.forEach(({ element, classes }) => {
+          classes.forEach((cls) => element.classList.add(cls));
+        });
       }
     },
   },
