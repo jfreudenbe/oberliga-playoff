@@ -18,14 +18,14 @@
     { "name": "Bietigheim Steelers", "seed": 4, "logo": "/oberliga-playoff/logos/bietigheim_steelers.png", "standing": 2 },
     { "name": "Deggendorfer SC", "seed": 6, "logo": "/oberliga-playoff/logos/deggendorfer_sc.png", "standing": 3 },
     { "name": "ECDC Memmingen Indians", "seed": 8, "logo": "/oberliga-playoff/logos/memmingen_indians.png", "standing": 4 },
-    { "name": "Höchstadter EC", "seed": 10, "logo": "/oberliga-playoff/logos/hoechstadter_ec.png", "standing": 5 },
-    { "name": "EV Lindau Islanders", "seed": 12, "logo": "/oberliga-playoff/logos/lindau_islanders.png", "standing": 6 },
-    { "name": "Tölzer Löwen", "seed": 14, "logo": "/oberliga-playoff/logos/toelzer_loewen.png", "standing": 7 },
+    { "name": "Tölzer Löwen", "seed": 10, "logo": "/oberliga-playoff/logos/toelzer_loewen.png", "standing": 7 },
+    { "name": "Höchstadter EC", "seed": 12, "logo": "/oberliga-playoff/logos/hoechstadter_ec.png", "standing": 5 },
+    { "name": "EV Lindau Islanders", "seed": 14, "logo": "/oberliga-playoff/logos/lindau_islanders.png", "standing": 6 },
     { "name": "SC Riessersee", "seed": 16, "logo": "/oberliga-playoff/logos/sc_riessersee.png", "standing": 8 },
-    { "name": "EC Peiting", "seed": 18, "logo": "/oberliga-playoff/logos/ec_peiting.png", "standing": 9 },
-    { "name": "EV Füssen", "seed": 20, "logo": "/oberliga-playoff/logos/ev_fuessen.png", "standing": 10 },
-    { "name": "onesto Tigers Bayreuth", "seed": 22, "logo": "/oberliga-playoff/logos/tigers_bayreuth.png", "standing": 11 },
-    { "name": "EHF Passau Black Hawks", "seed": 24, "logo": "/oberliga-playoff/logos/passau_black_hawks.png", "standing": 12 },
+    { "name": "EV Füssen", "seed": 18, "logo": "/oberliga-playoff/logos/ev_fuessen.png", "standing": 10 },
+    { "name": "EC Peiting", "seed": 20, "logo": "/oberliga-playoff/logos/ec_peiting.png", "standing": 9 },
+    { "name": "EHF Passau Black Hawks", "seed": 22, "logo": "/oberliga-playoff/logos/passau_black_hawks.png", "standing": 12 },
+    { "name": "onesto Tigers Bayreuth", "seed": 24, "logo": "/oberliga-playoff/logos/tigers_bayreuth.png", "standing": 11 },
     { "name": "Stuttgarter EC", "seed": 26, "logo": "/oberliga-playoff/logos/stuttgarter_ec.png", "standing": 13 }
   ]
 }
