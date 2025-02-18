@@ -1,7 +1,7 @@
 {
   "nord": [
     { "name": "Tilburg Trappers", "seed": 1, "logo": "/oberliga-playoff/logos/tilburg_trappers.png", "locked": true},
-    { "name": "Hannover Scorpions", "seed": 3, "logo": "/oberliga-playoff/logos/hannover_scorpions.png"},
+    { "name": "Hannover Scorpions", "seed": 3, "logo": "/oberliga-playoff/logos/hannover_scorpions.png", "locked": true},
     { "name": "KSW Icefighters Leipzig", "seed": 5, "logo": "/oberliga-playoff/logos/icefighters_leipzig.png"},
     { "name": "ESC Wohnbau Moskitos Essen", "seed": 7, "logo": "/oberliga-playoff/logos/moskitos_essen.png"},
     { "name": "Hannover Indians", "seed": 9, "logo": "/oberliga-playoff/logos/hannover_indians.png"},
@@ -16,12 +16,12 @@
   "süd": [
     { "name": "Heilbronner Falken", "seed": 2, "logo": "/oberliga-playoff/logos/heilbronner_falken.png", "locked": true},
     { "name": "Bietigheim Steelers", "seed": 4, "logo": "/oberliga-playoff/logos/bietigheim_steelers.png", "locked": true},
-    { "name": "Deggendorfer SC", "seed": 6, "logo": "/oberliga-playoff/logos/deggendorfer_sc.png"},
-    { "name": "ECDC Memmingen Indians", "seed": 8, "logo": "/oberliga-playoff/logos/memmingen_indians.png"},
+    { "name": "Deggendorfer SC", "seed": 6, "logo": "/oberliga-playoff/logos/deggendorfer_sc.png", "locked": true},
+    { "name": "ECDC Memmingen Indians", "seed": 8, "logo": "/oberliga-playoff/logos/memmingen_indians.png", "locked": true},
     { "name": "Tölzer Löwen", "seed": 10, "logo": "/oberliga-playoff/logos/toelzer_loewen.png"},
-    { "name": "Höchstadter EC", "seed": 12, "logo": "/oberliga-playoff/logos/hoechstadter_ec.png"},
+    { "name": "EV Lindau Islanders", "seed": 12, "logo": "/oberliga-playoff/logos/lindau_islanders.png"},
+    { "name": "Höchstadter EC", "seed": 14, "logo": "/oberliga-playoff/logos/hoechstadter_ec.png"},
     { "name": "SC Riessersee", "seed": 16, "logo": "/oberliga-playoff/logos/sc_riessersee.png"},
-    { "name": "EV Lindau Islanders", "seed": 14, "logo": "/oberliga-playoff/logos/lindau_islanders.png"},
     { "name": "EV Füssen", "seed": 18, "logo": "/oberliga-playoff/logos/ev_fuessen.png"},
     { "name": "EC Peiting", "seed": 20, "logo": "/oberliga-playoff/logos/ec_peiting.png"},
     { "name": "EHF Passau Black Hawks", "seed": 22, "logo": "/oberliga-playoff/logos/passau_black_hawks.png"},
