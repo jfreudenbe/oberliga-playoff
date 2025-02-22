@@ -14,7 +14,7 @@
         Click on a team’s logo to select a winner.
       </h2>
       <h3 class="text-center text-gray-600 text-xs md:text-sm font-bebas">
-        (last update: 18.02.2025 12:00)
+        (last update: 22.02.2025 10:00)
       </h3>
     </div>
   </div>
