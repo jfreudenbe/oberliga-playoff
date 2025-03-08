@@ -32,7 +32,7 @@
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
     >
       <!-- Pre-Playoffs -->
-      <div class="md:max-w-72 motion-preset-slide-up">
+      <div class="md:max-w-72 motion-preset-slide-up hidden">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Pre-Playoffs (BO3)
         </h3>
@@ -377,6 +377,7 @@ export default {
   },
   created() {
     this.initializeBracket();
+    this.assignPrePlayoffWinners();
   },
   methods: {
     initializeBracket() {
@@ -529,6 +530,7 @@ export default {
       }
     },
     assignPrePlayoffWinners() {
+      /** 
       const nordTeams = [];
       const südTeams = [];
 
@@ -548,10 +550,12 @@ export default {
         nordTeams.reverse();
       }
 
-      this.bracket.achtelfinale[0][1] = südTeams[1]; // Worst seed plays Nord #1 (Tilburg)
-      this.bracket.achtelfinale[1][1] = nordTeams[1]; // Second worst seed plays Süd #1 (Bietigheim)
-      this.bracket.achtelfinale[2][1] = südTeams[0]; // Second best seed plays Nord #2 (Hannover Scorpions)
-      this.bracket.achtelfinale[3][1] = nordTeams[0]; // Best seed plays Süd #2 (Heilbronn)
+      */
+
+      this.bracket.achtelfinale[0][1] = this.teams.süd[7] // Worst seed plays Nord #1 (Tilburg)
+      this.bracket.achtelfinale[1][1] = this.teams.nord[9]; // Second worst seed plays Süd #1 (Bietigheim)
+      this.bracket.achtelfinale[2][1] = this.teams.süd[6]; // Second best seed plays Nord #2 (Hannover Scorpions)
+      this.bracket.achtelfinale[3][1] = this.teams.nord[8]; // Best seed plays Süd #2 (Heilbronn)
     },
     assignViertelfinale() {
       const viertelfinaleTeams = Array.from(
@@ -603,14 +607,16 @@ export default {
 
     initializeAchtelfinale() {
       this.bracket.achtelfinale = [
-        [this.teams.nord[0], { name: "TBD" }], // Nord 1 vs TBD
-        [this.teams.süd[0], { name: "TBD" }], // Süd 1 vs TBD
-        [this.teams.nord[1], { name: "TBD" }], // Nord 2 vs TBD
-        [this.teams.süd[1], { name: "TBD" }], // Süd 2 vs TBD
-        [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
-        [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
-        [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
-        [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
+ 
+          [this.teams.nord[0], this.teams.süd[8]], // Nord 1 vs TBD
+          [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
+          [this.teams.nord[1], this.teams.süd[7]], // Nord 2 vs TBD
+          [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
+          [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
+          [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
+          [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
+          [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
+      
       ];
     },
 
@@ -643,10 +649,10 @@ export default {
           [this.teams.nord[7], this.teams.nord[8]], // Nord 8 vs Nord 9
         ],
         achtelfinale: [
-          [this.teams.nord[0], { name: "TBD" }], // Nord 1 vs TBD
-          [this.teams.süd[0], { name: "TBD" }], // Süd 1 vs TBD
-          [this.teams.nord[1], { name: "TBD" }], // Nord 2 vs TBD
-          [this.teams.süd[1], { name: "TBD" }], // Süd 2 vs TBD
+          [this.teams.nord[0], this.teams.süd[8]], // Nord 1 vs TBD
+          [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
+          [this.teams.nord[1], this.teams.süd[7]], // Nord 2 vs TBD
+          [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
           [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
           [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
           [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
