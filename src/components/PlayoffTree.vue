@@ -649,9 +649,9 @@ export default {
           [this.teams.nord[7], this.teams.nord[8]], // Nord 8 vs Nord 9
         ],
         achtelfinale: [
-          [this.teams.nord[0], this.teams.süd[8]], // Nord 1 vs TBD
+          [this.teams.nord[0], this.teams.süd[7]], // Nord 1 vs TBD
           [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
-          [this.teams.nord[1], this.teams.süd[7]], // Nord 2 vs TBD
+          [this.teams.nord[1], this.teams.süd[6]], // Nord 2 vs TBD
           [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
           [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
           [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
