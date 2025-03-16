@@ -32,7 +32,9 @@
       class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
     >
       <!-- Pre-Playoffs -->
-      <div class="md:max-w-72 motion-preset-slide-up hidden">
+      <div
+        class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
+      >
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Pre-Playoffs (BO3)
         </h3>
@@ -84,7 +86,9 @@
       </div>
 
       <!-- Achtelfinale -->
-      <div class="md:max-w-72 motion-preset-slide-up">
+      <div
+        class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
+      >
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Achtelfinale (BO5)
         </h3>
@@ -378,6 +382,7 @@ export default {
   created() {
     this.initializeBracket();
     this.assignPrePlayoffWinners();
+    this.assignViertelfinaleCandidates();
   },
   methods: {
     initializeBracket() {
@@ -552,10 +557,21 @@ export default {
 
       */
 
-      this.bracket.achtelfinale[0][1] = this.teams.süd[7] // Worst seed plays Nord #1 (Tilburg)
+      this.bracket.achtelfinale[0][1] = this.teams.süd[7]; // Worst seed plays Nord #1 (Tilburg)
       this.bracket.achtelfinale[1][1] = this.teams.nord[9]; // Second worst seed plays Süd #1 (Bietigheim)
       this.bracket.achtelfinale[2][1] = this.teams.süd[6]; // Second best seed plays Nord #2 (Hannover Scorpions)
       this.bracket.achtelfinale[3][1] = this.teams.nord[8]; // Best seed plays Süd #2 (Heilbronn)
+    },
+
+    assignViertelfinaleCandidates() {
+      this.bracket.viertelfinale[0][0] = this.teams.nord[0];
+      this.bracket.viertelfinale[0][1] = this.teams.süd[4];
+      this.bracket.viertelfinale[1][0] = this.teams.süd[0];
+      this.bracket.viertelfinale[1][1] = this.teams.süd[3];
+      this.bracket.viertelfinale[2][0] = this.teams.nord[1];
+      this.bracket.viertelfinale[2][1] = this.teams.süd[2];
+      this.bracket.viertelfinale[3][0] = this.teams.süd[1];
+      this.bracket.viertelfinale[3][1] = this.teams.nord[2];
     },
     assignViertelfinale() {
       const viertelfinaleTeams = Array.from(
@@ -607,16 +623,14 @@ export default {
 
     initializeAchtelfinale() {
       this.bracket.achtelfinale = [
- 
-          [this.teams.nord[0], this.teams.süd[8]], // Nord 1 vs TBD
-          [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
-          [this.teams.nord[1], this.teams.süd[7]], // Nord 2 vs TBD
-          [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
-          [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
-          [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
-          [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
-          [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
-      
+        [this.teams.nord[0], this.teams.süd[8]], // Nord 1 vs TBD
+        [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
+        [this.teams.nord[1], this.teams.süd[7]], // Nord 2 vs TBD
+        [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
+        [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
+        [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
+        [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
+        [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
       ];
     },
 
@@ -658,7 +672,13 @@ export default {
           [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
           [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
         ],
-        viertelfinale: new Array(4).fill(null).map(() => [null, null]),
+        viertelfinale: [
+          [this.teams.nord[0], this.teams.süd[4]],
+          [this.teams.süd[0], this.teams.süd[3]],
+          [this.teams.nord[1], this.teams.süd[2]],
+          [this.teams.süd[1], this.teams.nord[2]],
+        ],
+
         halbfinale: new Array(2).fill(null).map(() => [null, null]),
         finale: [[null, null]],
       };
