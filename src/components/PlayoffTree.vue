@@ -155,7 +155,9 @@
       </div>
 
       <!-- Viertelfinale -->
-      <div class="md:max-w-72 motion-preset-slide-up">
+      <div
+        class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
+      >
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Viertelfinale (BO7)
         </h3>
@@ -383,6 +385,7 @@ export default {
     this.initializeBracket();
     this.assignPrePlayoffWinners();
     this.assignViertelfinaleCandidates();
+    this.assignHalbfinale();
   },
   methods: {
     initializeBracket() {
@@ -535,7 +538,7 @@ export default {
       }
     },
     assignPrePlayoffWinners() {
-      /** 
+      /**
       const nordTeams = [];
       const südTeams = [];
 
@@ -602,6 +605,7 @@ export default {
     },
 
     assignHalbfinale() {
+      /**
       const halbfinaleTeams = Array.from(this.halbfinaleCandidates.values());
 
       halbfinaleTeams.sort((a, b) => {
@@ -609,6 +613,11 @@ export default {
       });
       this.bracket.halbfinale[0] = [halbfinaleTeams[0], halbfinaleTeams[3]]; // Best vs Worst
       this.bracket.halbfinale[1] = [halbfinaleTeams[1], halbfinaleTeams[2]]; // Second best vs Third best
+       */
+      this.bracket.halbfinale = [
+        [this.teams.nord[0], this.teams.süd[1]],
+        [this.teams.süd[0], this.teams.nord[1]],
+      ];
     },
 
     assignFinale() {
@@ -678,8 +687,11 @@ export default {
           [this.teams.nord[1], this.teams.süd[2]],
           [this.teams.süd[1], this.teams.nord[2]],
         ],
+        halbfinale: [
+          [this.teams.nord[0], this.teams.süd[1]],
+          [this.teams.süd[0], this.teams.nord[1]],
+        ],
 
-        halbfinale: new Array(2).fill(null).map(() => [null, null]),
         finale: [[null, null]],
       };
     },
