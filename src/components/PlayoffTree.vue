@@ -29,9 +29,11 @@
     class="bg-gray-50 py-12 overflow-x-hidden motion-preset-fade"
   >
     <div
-      class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
+      class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-12 md:mt-12 max-w-screen-2xl p-4 mx-auto"
     >
       <!-- Pre-Playoffs -->
+      <!--
+      
       <div
         class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
       >
@@ -46,7 +48,9 @@
           <div
             class="flex justify-around items-center p-2 py-3 rounded-md shadow-md bg-white border border-gray-300"
           >
-            <!-- Team 1 -->
+          -->
+      <!-- Team 1 -->
+      <!--
             <div class="flex flex-col items-center">
               <img
                 :src="match[0]?.logo || ''"
@@ -62,10 +66,14 @@
                 @click="handleLogoClick(match[0], 'PrePlayoffs', index)"
               />
             </div>
-            <!-- VS -->
+            -->
+      <!-- VS -->
+      <!--
             <div class="text-gray-600">vs</div>
+              -->
+      <!-- Team 2-->
+      <!-- VS 
 
-            <!-- Team 2 -->
             <div class="flex flex-col items-center">
               <img
                 :src="match[1]?.logo || ''"
@@ -84,11 +92,10 @@
           </div>
         </div>
       </div>
+    -->
 
       <!-- Achtelfinale -->
-      <div
-        class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
-      >
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Achtelfinale (BO5)
         </h3>
@@ -155,9 +162,7 @@
       </div>
 
       <!-- Viertelfinale -->
-      <div
-        class="md:max-w-72 motion-preset-slide-up hidden md:block md:opacity-30 pointer-events-none"
-      >
+      <div class="md:max-w-72 motion-preset-slide-up">
         <h3 class="font-semibold text-xl text-center text-gray-700 mb-2">
           Viertelfinale (BO7)
         </h3>
@@ -383,13 +388,11 @@ export default {
   },
   created() {
     this.initializeBracket();
-    this.assignPrePlayoffWinners();
-    this.assignViertelfinaleCandidates();
-    this.assignHalbfinale();
   },
   methods: {
     initializeBracket() {
       // Pre-Playoffs
+      /*
       const prePlayoffs = [
         [this.teams.süd[6], this.teams.süd[9]], // Süd 7 vs Süd 10
         [this.teams.süd[7], this.teams.süd[8]], // Süd 8 vs Süd 9
@@ -397,21 +400,22 @@ export default {
         [this.teams.nord[7], this.teams.nord[8]], // Nord 8 vs Nord 9
       ];
       this.bracket.prePlayoffs = prePlayoffs;
+       */
 
       // Achtelfinale
-      const nordTop6 = this.teams.nord.slice(0, 6);
-      const südTop6 = this.teams.süd.slice(0, 6);
+      const nordTop8 = this.teams.nord.slice(0, 8);
+      const südTop8 = this.teams.süd.slice(0, 8);
       const nordPlaceholders = [{ name: "TBD" }, { name: "TBD" }];
       const südPlaceholders = [{ name: "TBD" }, { name: "TBD" }];
 
-      const nordQualified = [...nordTop6, ...nordPlaceholders];
-      const südQualified = [...südTop6, ...südPlaceholders];
+      const nordQualified = [...nordTop8, ...nordPlaceholders];
+      const südQualified = [...südTop8, ...südPlaceholders];
 
       const achtelfinale = [
-        [nordQualified[0], südQualified[südQualified.length - 1]], // Nord 1 vs Last Süd
-        [südQualified[0], nordQualified[nordQualified.length - 1]], // Süd 1 vs Last Nord
-        [nordQualified[1], südQualified[südQualified.length - 2]], // Nord 2 vs Second Last Süd
-        [südQualified[1], nordQualified[nordQualified.length - 2]], // Süd 2 vs Second Last Nord
+        [nordQualified[0], "TBD"], // Nord 1 vs Last Süd
+        [südQualified[0], nordQualified[7]], // Süd 1 vs Last Nord
+        [nordQualified[1], südQualified[6]], // Nord 2 vs Second Last Süd
+        [südQualified[1], nordQualified[6]], // Süd 2 vs Second Last Nord
         [nordQualified[2], südQualified[5]], // Nord 3 vs Süd 6
         [südQualified[2], nordQualified[5]], // Süd 3 vs Nord 6
         [nordQualified[3], südQualified[4]], // Nord 4 vs Süd 5
@@ -605,7 +609,6 @@ export default {
     },
 
     assignHalbfinale() {
-      /**
       const halbfinaleTeams = Array.from(this.halbfinaleCandidates.values());
 
       halbfinaleTeams.sort((a, b) => {
@@ -613,11 +616,6 @@ export default {
       });
       this.bracket.halbfinale[0] = [halbfinaleTeams[0], halbfinaleTeams[3]]; // Best vs Worst
       this.bracket.halbfinale[1] = [halbfinaleTeams[1], halbfinaleTeams[2]]; // Second best vs Third best
-       */
-      this.bracket.halbfinale = [
-        [this.teams.nord[0], this.teams.süd[1]],
-        [this.teams.süd[0], this.teams.nord[1]],
-      ];
     },
 
     assignFinale() {
@@ -658,42 +656,14 @@ export default {
     },
 
     resetBracket() {
-      this.prePlayoffWinners.clear();
+      //this.prePlayoffWinners.clear();
       this.viertelfinaleCandidates.clear();
       this.halbfinaleCandidates.clear();
       this.finaleCandidates.clear();
 
-      // Reinitialize the bracket
-      this.bracket = {
-        prePlayoffs: [
-          [this.teams.süd[6], this.teams.süd[9]], // Süd 7 vs Süd 10
-          [this.teams.süd[7], this.teams.süd[8]], // Süd 8 vs Süd 9
-          [this.teams.nord[6], this.teams.nord[9]], // Nord 7 vs Nord 10
-          [this.teams.nord[7], this.teams.nord[8]], // Nord 8 vs Nord 9
-        ],
-        achtelfinale: [
-          [this.teams.nord[0], this.teams.süd[7]], // Nord 1 vs TBD
-          [this.teams.süd[0], this.teams.nord[9]], // Süd 1 vs TBD
-          [this.teams.nord[1], this.teams.süd[6]], // Nord 2 vs TBD
-          [this.teams.süd[1], this.teams.nord[8]], // Süd 2 vs TBD
-          [this.teams.nord[2], this.teams.süd[5]], // Nord 3 vs Süd 6
-          [this.teams.süd[2], this.teams.nord[5]], // Süd 3 vs Nord 6
-          [this.teams.nord[3], this.teams.süd[4]], // Nord 4 vs Süd 5
-          [this.teams.süd[3], this.teams.nord[4]], // Süd 4 vs Nord 5
-        ],
-        viertelfinale: [
-          [this.teams.nord[0], this.teams.süd[4]],
-          [this.teams.süd[0], this.teams.süd[3]],
-          [this.teams.nord[1], this.teams.süd[2]],
-          [this.teams.süd[1], this.teams.nord[2]],
-        ],
-        halbfinale: [
-          [this.teams.nord[0], this.teams.süd[1]],
-          [this.teams.süd[0], this.teams.nord[1]],
-        ],
-
-        finale: [[null, null]],
-      };
+      this.initializeViertelfinale();
+      this.initializeHalbfinale();
+      this.initializeFinale();
     },
     async downloadBracket() {
       const bracketElement = this.$refs.bracket;

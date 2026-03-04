@@ -4,6 +4,7 @@
   >
     Tabellen
   </h2>
+
   <div
     class="px-4 pb-2 flex text-xs md:text-sm justify-center md:justify-start"
   >
@@ -16,10 +17,10 @@
   </div>
 
   <div
-    class="grid grid-cols-1 md:grid-cols-2 gap-x-2 mx-auto md:mx-0 md:max-w-xl px-4 pb-4"
+    class="grid grid-cols-1 md:grid-cols-2 gap-x-2 mx-auto md:mx-0 md:max-w-2xl px-4 pb-4"
   >
     <table
-      class="table-auto w-full border-collapse border border-gray-300 mb-6 md:max-w-72"
+      class="table-auto w-full border-collapse border border-gray-300 mb-6 md:max-w-96"
     >
       <thead class="bg-gray-200 border-b border-gray-300">
         <tr>
@@ -72,7 +73,7 @@
       </tbody>
     </table>
 
-    <table class="table-auto w-full border border-gray-300 md:max-w-64">
+    <table class="table-auto w-full border border-gray-300 md:max-w-72">
       <thead class="bg-gray-200 border-b border-gray-300">
         <tr>
           <th class="px-4 py-2 text-gray-700">Seed</th>
